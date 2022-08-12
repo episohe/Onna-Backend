@@ -17,17 +17,17 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import (
-    SpectacularJSONAPIView,
-    SpectacularSwaggerView
+    SpectacularAPIView,
+    SpectacularSwaggerView, SpectacularJSONAPIView,
 )
+
+app_name = 'api'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    # path('docs/yml/', SpectacularAPIView.as_view(), name='api'),
+    path('docs/schema/', SpectacularAPIView.as_view(), name='api-schema'),
     path('docs/json/', SpectacularJSONAPIView.as_view(), name='api'),
-    path('api/docs', SpectacularSwaggerView.as_view(url_name='api'), name='swagger-ui'),
-]
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name='api-schema'), name='api-docs'),
 
 if settings.DEBUG:
     import debug_toolbar
