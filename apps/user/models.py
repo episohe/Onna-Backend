@@ -46,13 +46,13 @@ class Agency(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
-    userId = models.CharField(
-        max_length=10,
-        unique=True,
-        null=True,
-        validators=[validate_no_special_characters],
-        error_messages={'unique': '이미 사용 중인 아이디 입니다.'},
-    )
+    # userId = models.CharField(
+    #     max_length=10,
+    #     unique=True,
+    #     null=True,
+    #     validators=[validate_no_special_characters],
+    #     error_messages={'unique': '이미 사용 중인 아이디 입니다.'},
+    # )
 
     name = models.CharField(
         max_length=10,

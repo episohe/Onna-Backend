@@ -28,6 +28,7 @@ urlpatterns = [
     path('docs/schema/', SpectacularAPIView.as_view(), name='api-schema'),
     path('docs/json/', SpectacularJSONAPIView.as_view(), name='api'),
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='api-schema'), name='api-docs'),
+]
 
 if settings.DEBUG:
     import debug_toolbar
