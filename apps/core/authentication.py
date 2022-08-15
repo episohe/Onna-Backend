@@ -3,10 +3,10 @@ from rest_framework import authentication
 from rest_framework import exceptions
 
 from config import settings
-from user.models import Agency
-
-
 # JWT
+from core.models import Agency
+
+
 class JWTAuthentication(authentication.BaseAuthentication):
     def authenticate(self, request):
         try:

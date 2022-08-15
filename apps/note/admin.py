@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from note.models import SaleNote
+from core.models import SaleNote
 
 
 @admin.register(SaleNote)
