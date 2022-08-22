@@ -57,7 +57,7 @@ class PublicUserApiTests(TestCase):
         """Test an error is returned if password less than 5 chars."""
         payload = {
             'email': 'test@example.com',
-            'password': 'testpass123',
+            'password': '123',
             'name': 'Test Name',
             'phone': '010-2323-3434',
             'organization': 'onna',
@@ -130,7 +130,9 @@ class PrivateUserApiTests(TestCase):
         self.user = create_user(
             email='test@example.com',
             password='testpass123',
-            name='Test Name',
+            name='Test',
+            phone='010-0000-2222',
+            organization='test'
         )
         self.client = APIClient()
         self.client.force_authenticate(user=self.user)
@@ -143,6 +145,8 @@ class PrivateUserApiTests(TestCase):
         self.assertEqual(res.data, {
             'name': self.user.name,
             'email': self.user.email,
+            'phone': self.user.phone,
+            'organization': self.user.organization,
         })
 
     def test_post_me_not_allowed(self):

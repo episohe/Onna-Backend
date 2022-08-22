@@ -13,25 +13,17 @@ class CoreModel(models.Model):
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
-    def create_user(self, email, organization, password, name, phone):
-
+    def create_user(self, email, password=None, **extra_field):
+        """Create, save and return a new user."""
         if not email:
-            raise ValueError('must have users email')
-        if not password:
-            raise ValueError('must have users password')
-
-        user = self.model(
-            email=self.normalize_email(email),
-            organization=organization,
-            name=name,
-            phone=phone
-        )
+            raise ValueError('User must have an email address.')
+        user = self.model(email=self.normalize_email(email), **extra_field)
         user.set_password(password)
-        user.save(using=self._db)
+        user.save(using=self.db)
+
         return user
 
     def create_superuser(self, email, organization, password):
-
         user = self.create_user(
             email=self.normalize_email(email),
             organization=organization,
@@ -48,7 +40,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=20, null=True)
-    phone = models.CharField(default="000-0000-0000", max_length=30, null=True, unique=True)
+    phone = models.CharField(max_length=30, null=True, unique=True)
     organization = models.CharField(max_length=50)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -66,12 +58,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     def is_staff(self):
         return self.is_admin
 
+#
 # class Agency(models.Model):
 #     """Real-estate Agency"""
-#
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
 #     company = models.CharField(max_length=20)
-#     ceoName = models.CharField(max_length=20)
-#     businessNumber = models.IntegerField(blank=True, null=True)
+#     ceo = models.CharField(max_length=20)
+#     business_number = models.IntegerField(blank=True, null=True)
 #     businessRegistration = models.FileField()
 #     businessStatus = models.CharField(max_length=30)
 #     item = models.CharField(max_length=30)
@@ -80,7 +73,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 #     address = models.CharField(max_length=300, null=True)
 #     faxNumber = models.IntegerField(blank=True, null=True)
 #     profile_pic = models.ImageField(default='default_profile_pic.jpg', upload_to='profile_pics')
-
+#
+#     class Meta:
+#         db_table = 'agency'
+#
+#     def __str__(self):
+#         return self.company
 
 # class RealtyType(models.Model):
 #     """
