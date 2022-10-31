@@ -1,109 +1,64 @@
-### Onna API
+# Onna API
 
-* 구현 예정
+## 엄마의, 엄마에 의한, 엄마를 위한!  부동산 중개망 서비스를 만들어보자!
+
+### 🤙 Git Commit Convention
+
+<h6><이모티콘> <타입> : <제목> 형식으로 작성하며 제목은 최대 50글자</h6>
+
+```
+예시 :star: feaure: Login
+```
+
+|       Emoji        | Raw Emoji Code       | Type       | Description       |
+|:------------------:|----------------------|------------|-------------------|
+|       :tada:       | `:tada:`             | `release`  | 첫 커밋              |
+|       :star:       | `:star:`             | `feature`  | 새로운 기능 추가         |
+|       :bug:        | `:bug:`              | `bug`      | 버그 수정             |
+|      :shirt:       | `:shirt:`            | `refactor` | 코드 리팩토링           |
+| :white_check_mark: | `:white_check_mark:` | `test`     | 테스트 코드 추가         |
+|      :wrench:      | `:wrench:`           | `config`   | 설정 변경             |
+|      :pencil:      | `:pencil:`           | `docs`     | 문서 작업             |
+|      :whale:       | `:whale:`            | `build`    | 도커 파일             |
+|     :lipstick:     | `:lipstick:`         | `style`    | 코드 의미에 영향을 주지 않는 변경사항 |
+|     :package:      | `:package:`          | `build`    | 빌드 부분 혹은 패키지 매니저 수정사항 |
+
+### 🔧 기술 스택
+
+`Django` `DRF` `PostgreSQL`
+
+### 📋 요구 사항 분석
 
 ```bash
-1. 로그인
+1. 회사는 중개 매물을 등록한다.
+2. 회사는 중개 매물을 비공개 혹은 공개할 수 있다.
+3. 회사는 중개 매물을 등록/수정/삭제 할 수 있다. 
+4. 사용자는 중개 매물을 조회할 수 있다.
+5. 매물의 상세 정보에는 부동산의 기본 정보, 사진 그리고 나만 볼 수 있는 메모 기능이 있다.
+6. 공동주택 단지 목록제공 서비스(공공데이터)를 이용하여 아파트 정보에 대한 편의 기능을 제공한다.
+7. 매물의 거래단계를 설정할 수 있다. (미계약 -> 계약 중 -> 계약 완료)
+8. 매물 등록일 기준 1달 경과 시 거래 단계가 미계약 상태라면 알람
+9. 계약 완료 상태가 되면 비공개로 전환 
+10. 매물 확인을 위한 채팅 기능 (자주하는 문의 사항은 선택하여 사용할 수 있는 편의 기능 제공)
+11. 계약서 작성을 누르면 부동산 종류를 선택 후 등기부등본 발급 창으로 넘긴다.
+```
+
+### ⭐ 구현 예정
+
+```bash
+1. 계정
 2. 매물장 / 매수장
 3. 공동 중개 매물(거래망)
-4. 계약서
-5. 자주 방문하는 웹 사이트 링크
+4. 계약서 작성 --- 더 나아가 부동산 거래 신고도 가능하다면 굳!
+5. 자주 방문하는 웹 사이트 등록
 6. 게시판
-```
-# git-commit-message-convention 📌
-
-Extend git commit message from angular style
-
-
-# Commit Message Format
-All Commit Message Format **MUST** meet this Text Format:
-
-```
-[:<Emoji>: ][<Type>[(<Scope>)]: ]<Subject>
+7. 채팅 기능
 ```
 
-# Emojis 
-* <a href="https://gitmoji.dev">
-  <img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square" alt="Gitmoji">
-</a>
-
-| Emoji                         | Raw Emoji Code                  | Type               | Description |
-|:-----------------------------:|---------------------------------|--------------------|-------------|
-| :star:                     | `:star:`                     | `new` or `feature` | add **new feature** |
-| :bug:                      | `:bug:`                      | `bug`              | fix **bug** issue |
-| :ambulance:                | `:ambulance:`                | `bug`              | critical hotfix **bug** issue |
-| :lock:                     | `:lock:`                     | `security`         | fix **security** issue |
-| :chart_with_upwards_trend: | `:chart_with_upwards_trend:` | `performance`      | fix **performance** issue |
-| :zap:                      | `:zap:`                      | `improvement`      | update **backwards-compatible** feature |
-| :boom:                     | `:boom`                         | `breaking`         | update **backwards-incompatible** feature |
-| :warning:                  | `:warning:`                  | `deprecated`       | **deprecate** feature |
-| :globe_with_meridians:     | `:globe_with_meridians:`     | `i18n`             | update or fix **internationalization** |
-| :wheelchair:               | `:wheelchair:`               | `a11y`             | update or fix **accessibility** |
-| :rotating_light:           | `:rotating_light:`           | `refactor`         | remove **linter**/strict/deprecation warnings |
-| :shirt:                    | `:shirt:`                    | `refactor`         | **refactoring** or code **layouting** |
-| :white_check_mark:         | `:white_check_mark:`         | `test`             | add **tests**, fix **tests** failur or **CI** building |
-| :pencil:                   | `:pencil:`                   | `docs`             | update **documentation** |
-| :copyright:                 | `:copyright:`                 | `docs`             | decide or change **license** |
-| :lollipop:                 | `:lollipop:`                 | `example`          | for **example** or **demo** codes |
-| :lipstick:                 | `:lipstick:`                 | `update`           | update **UI/Cosmetic** |
-| :up:                       | `:up:`                       | `update`           | update **other** |
-| :truck:                    | `:truck:`                    | `update`           | **move** or **rename** files, repository, ... |
-| :twisted_rightwards_arrows:| `:twisted_rightwards_arrows:`| `update`           | merge **conflict resolution** |
-| :heavy_plus_sign:          | `:heavy_plus_sign:`          | `update`           | **add** files, dependencies, ... |
-| :heavy_minus_sign:         | `:heavy_minus_sign:`         | `update`           | **remove** files, dependencies, ... |
-| :on:                       | `:on:`                       | `update`           | **enable** feature and something ... |
-| :arrow_up:                 | `:arrow_up:`                 | `deps`             | upgrade **dependencies** |
-| :arrow_down:               | `:arrow_down:`               | `deps`             | downgrade **dependencies** |
-| :pushpin:                  | `:pushpin:`                  | `deps`             | pin **dependencies** |
-| :wrench:                   | `:wrench:`                   | `config`           | update **configuration** |
-| :package:                  | `:package:`                  | `build`            | **packaging** or **bundling** or **building** |
-| :whale:                    | `:whale:`                    | `build`            | Dockerfile |
-| :hatching_chick:           | `:hatching_chick:`           | `release`          | **initial** commit |
-| :confetti_ball:            | `:confetti_ball:`            | `release`          | release **major** version |
-| :tada:                     | `:tada:`                     | `release`          | release **minor** version |
-| :sparkles:                 | `:sparkles:`                 | `release`          | release **patch** version |
-| :rocket:                   | `:rocket:`                   | `release`          | **deploy** to production enviroment |
-| :bookmark:                 | `:bookmark:`                 | `release`          | **tagged** with version label |
-| :back:                     | `:back:`                     | `revert`           | **revert** commiting |
-| :construction:             | `:construction:`             | `wip`              | **WIP** commiting |
-
-
-# Types
-
-| Type          | Description                                      |
-|:-------------:|--------------------------------------------------|
-| `feature`     | for new feature implementing commit              |
-| `update`      | for update commit                                |
-| `bug`         | for bug fix commit                               |
-| `security`    | for security issue fix commit                    |
-| `performance` | for performance issue fix commit                 |
-| `improvement` | for backwards-compatible enhancement commit      |
-| `breaking`    | for backwards-incompatible enhancement commit    |
-| `deprecated`  | for deprecated feature commit                    |
-| `i18n`        | for i18n (internationalization) commit           |
-| `a11y`        | for a11y (accessibility) commit                  |
-| `refactor`    | for refactoring commit                           |
-| `docs`        | for documentation commit                         |
-| `example`     | for example code commit                          |
-| `test`        | for testing commit                               |
-| `deps`        | for dependencies upgrading or downgrading commit |
-| `config`      | for configuration commit                         |
-| `build`       | for packaging or bundling commit                 |
-| `release`     | for publishing commit                            |
-| `wip`         | for work in progress commit                      |
-| `chore`       | for other operations commit                      |
-
-
-If the prefix is the below types, it will appear in the changelog. 
-
-- `feature`
-- `bug`
-- `performance`
-- `security`
-- `improvement`
-- `deprecated`
-- `breaking`
-
-
-# Scope
-The scope could be anything specifying place or category of the commit change. For example $location, $browser, $compile, $rootScope, ngHref, ngClick, ngView, feature1, etc...
+### 🔖 기능 구현 과정
+```bash
+- [ ] 모델링: 회사, 사용자(직원), 부동산 정보, 계약 등.. 
+- [ ] 계정 관리(회원가입, 로그인, 로그아웃, 회원 정보 수정 그리고 아이디/비밀번호 찾기)
+- [ ] 매수장/매물장에 물건 등록
+- [ ] 목록 및 조회 기능
+```
