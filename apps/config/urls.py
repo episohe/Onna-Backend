@@ -21,13 +21,14 @@ from drf_spectacular.views import (
     SpectacularSwaggerView, SpectacularJSONAPIView,
 )
 
-app_name = 'api'
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('docs/schema/', SpectacularAPIView.as_view(), name='api-schema'),
     path('docs/json/', SpectacularJSONAPIView.as_view(), name='api'),
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='api-schema'), name='api-docs'),
+
+    path('api/user/', include('user.urls'))
+]
 
 if settings.DEBUG:
     import debug_toolbar

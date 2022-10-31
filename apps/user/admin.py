@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 
-from .models import Agency
+from core.models import User
 
 
 class UserCreationForm(forms.ModelForm):
@@ -14,8 +14,8 @@ class UserCreationForm(forms.ModelForm):
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
 
     class Meta:
-        model = Agency
-        fields = ('email', 'organization')
+        model = User
+        fields = ('email', 'organization', 'name', 'phone')
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -42,11 +42,11 @@ class UserChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField()
 
     class Meta:
-        model = Agency
+        model = User
         fields = ('email', 'password', 'organization', 'is_active', 'is_admin')
 
 
-class AgencyAdmin(BaseUserAdmin):
+class UserAdmin(BaseUserAdmin):
     # The forms to add and change users instances
     form = UserChangeForm
     add_form = UserCreationForm
@@ -54,11 +54,11 @@ class AgencyAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('email', 'organization', 'is_admin', 'ceoName')
+    list_display = ('email', 'organization', 'is_admin')
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('organization',)}),
+        ('Personal info', {'fields': ('organization', 'name', 'phone')}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -75,4 +75,4 @@ class AgencyAdmin(BaseUserAdmin):
 
 
 # Now register the new UserAdmin...
-admin.site.register(Agency, AgencyAdmin)
+admin.site.register(User, UserAdmin)
