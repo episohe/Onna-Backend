@@ -34,6 +34,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=20, null=True)
     phone = models.CharField(max_length=30, null=True, unique=True)
     organization = models.CharField(max_length=50)
+    role = models.CharField(max_length=30, verbose_name='직급/직책')
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
