@@ -36,13 +36,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
 
     email = models.EmailField(verbose_name="이메일", unique=True)
-    name = models.CharField(verbose_name="이름", max_length=20, null=True)
-    phone = models.CharField(verbose_name="연락처", max_length=30, null=True, unique=True)
+    name = models.CharField(verbose_name="이름", max_length=20)
+    phone = models.CharField(verbose_name="연락처", max_length=30, unique=True)
     organization = models.CharField(verbose_name="소속", max_length=50)
     role = models.CharField(verbose_name="직급/직책", max_length=30)
     is_active = models.BooleanField(verbose_name="", default=True)
     is_admin = models.BooleanField(verbose_name="이름", default=False)
-    permission = models.CharField(max_length=2, choices=PERMISSION_CHOICES, verbose_name='권한')
+    permission = models.CharField(verbose_name='권한', max_length=10, choices=PERMISSION_CHOICES, default='User')
 
     objects = UserManager()
 
