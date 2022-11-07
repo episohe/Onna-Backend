@@ -1,36 +1,12 @@
 from django.db import models
 
-from config.settings import AUTH_USER_MODEL
-
 
 class CoreModel(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(verbose_name="생성일", auto_now_add=True)
+    modified = models.DateTimeField(verbose_name="수정일", auto_now=True)
 
     class Meta:
         abstract = True
-
-
-class Agency(models.Model):
-    """Real-estate Agency"""
-    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='회원')
-    company = models.CharField(max_length=20, verbose_name='회사')
-    ceo = models.CharField(max_length=20, verbose_name='대표')
-    business_number = models.IntegerField(blank=True, null=True)
-    businessRegistration = models.FileField()
-    businessStatus = models.CharField(max_length=30)
-    item = models.CharField(max_length=30)
-    officerNumber = models.IntegerField(blank=True, null=True)
-    officeCertificate = models.FileField()
-    address = models.CharField(max_length=300, null=True)
-    faxNumber = models.IntegerField(blank=True, null=True)
-    profile_pic = models.ImageField(default='default_profile_pic.jpg', upload_to='profile_pics')
-
-    class Meta:
-        db_table = 'agency'
-
-    def __str__(self):
-        return self.company
 
 # class RealtyType(models.Model):
 #     """

@@ -28,15 +28,23 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    objects = UserManager()
+    """User"""
 
-    email = models.EmailField(max_length=255, unique=True)
-    name = models.CharField(max_length=20, null=True)
-    phone = models.CharField(max_length=30, null=True, unique=True)
-    organization = models.CharField(max_length=50)
-    role = models.CharField(max_length=30, verbose_name='직급/직책')
-    is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False)
+    PERMISSION_CHOICES: tuple = (
+        ("Subscriber", "구독자"),
+        ("User", "일반 사용자")
+    )
+
+    email = models.EmailField(verbose_name="이메일", unique=True)
+    name = models.CharField(verbose_name="이름", max_length=20, null=True)
+    phone = models.CharField(verbose_name="연락처", max_length=30, null=True, unique=True)
+    organization = models.CharField(verbose_name="소속", max_length=50)
+    role = models.CharField(verbose_name="직급/직책", max_length=30)
+    is_active = models.BooleanField(verbose_name="", default=True)
+    is_admin = models.BooleanField(verbose_name="이름", default=False)
+    permission = models.CharField(max_length=2, choices=PERMISSION_CHOICES, verbose_name='권한')
+
+    objects = UserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['organization']
