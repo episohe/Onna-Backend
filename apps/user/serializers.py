@@ -42,8 +42,13 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
-class AuthTokenSerializer(serializers.Serializer):
+class AuthTokenSerializer(serializers.ModelSerializer):
     """Serializer for the user auth token."""
+
+    class Meta:
+        model = get_user_model()
+        fields = ["email", "password"]
+
     email = serializers.EmailField()
     password = serializers.CharField(
         style={"input_type": "password"},

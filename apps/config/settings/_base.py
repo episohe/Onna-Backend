@@ -55,6 +55,7 @@ DJANGO_APPS = [
 PROJECT_APPS = [
     "core.apps.CoreConfig",
     "user.apps.UserConfig",
+    "reception.apps.ReceptionConfig",
 ]
 
 THIRD_PARTY_APPS = [
