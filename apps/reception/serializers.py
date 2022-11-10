@@ -31,3 +31,15 @@ class ReceptionSerializer(serializers.ModelSerializer):
             "transaction_type": {"write_only": True},
             "property_type": {"write_only": True},
         }
+
+    def create(self, validated_data):
+        """Create and return a reception."""
+
+        reception = Reception.objects.create(**validated_data)
+        return reception
+
+    def update(self, instance, validated_data):
+        """Update and return user."""
+
+        reception = super().update(instance, validated_data)
+        return reception
