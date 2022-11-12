@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 
 
-class Reception(models.Model):
+class Realty(models.Model):
     """매물장"""
 
     TRANSACTION_CHOICES = (
@@ -29,7 +29,13 @@ class Reception(models.Model):
         ('6', 'LGU+ 알뜰폰'),
     )
 
-    user = models.ForeignKey(verbose_name="회원", to=get_user_model(), on_delete=models.DO_NOTHING, related_name="user")
+    user = models.ForeignKey(
+        verbose_name="회원",
+        to=get_user_model(),
+        on_delete=models.DO_NOTHING,
+        related_name="realty_user"
+    )
+
     client_name = models.CharField(verbose_name="소유자 성함", max_length=10)
     client_phone = models.CharField(verbose_name="소유자 연락처", max_length=20)
     phone_agency = models.IntegerField(verbose_name="통신사", choices=PHONE_AGENCY_CHOICES)
@@ -43,7 +49,7 @@ class Reception(models.Model):
     memo = models.TextField(verbose_name="비고", null=True, blank=True)
 
     class Meta:
-        db_table = "reception"
+        db_table = "realty"
 
     def transaction_type_name(self):
         return self.get_transaction_type_display()

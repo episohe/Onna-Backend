@@ -6,6 +6,6 @@ from reception import views
 app_name = 'reception'
 
 urlpatterns = [
-    path('receptions', views.ReceptionListCreateView.as_view(), name='receptions'),
-    path('reception', views.ReceptionManageView.as_view(), name='reception'),
+    path('notes', views.ReceptionListCreateView.as_view(), name='receptions'),
+    path('note/<int:pk>', views.ReceptionManageView.as_view(), name='reception'),
 ]

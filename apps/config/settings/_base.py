@@ -56,6 +56,7 @@ PROJECT_APPS = [
     "core.apps.CoreConfig",
     "user.apps.UserConfig",
     "reception.apps.ReceptionConfig",
+    "realty.apps.RealtyConfig",
 ]
 
 THIRD_PARTY_APPS = [
@@ -183,7 +184,8 @@ SPECTACULAR_SETTINGS = {
         "url": "https://github.com/episohe",
     },
     "VERSION": "1.0.0",
-    "SERVE_INCLUDE_SCHEMA": False,
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SCHEMA_PATH_PREFIX': r'/api',
 
     # https://www.npmjs.com/package/swagger-ui-dist 최신 버전 확인 후 version 수정 가능
     "SWAGGER_UI_DIST": "//unpkg.com/swagger-ui-dist@4.13.2",

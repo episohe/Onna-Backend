@@ -20,7 +20,13 @@ class Reception(models.Model):
         ('6', '원룸')
     )
 
-    user = models.ForeignKey(verbose_name="회원", to=get_user_model(), on_delete=models.DO_NOTHING, related_name="user")
+    user = models.ForeignKey(
+        verbose_name="회원",
+        to=get_user_model(),
+        on_delete=models.DO_NOTHING,
+        related_name="reception_user"
+    )
+    
     client_name = models.CharField(verbose_name="이름", max_length=10)
     client_phone = models.CharField(verbose_name="연락처", max_length=20)
     transaction_type = models.IntegerField(verbose_name="거래 종류", choices=TRANSACTION_CHOICES)
