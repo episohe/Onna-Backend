@@ -66,3 +66,6 @@ class Realty(models.Model):
 
     def phone_agency_name(self):
         return self.get_phone_agency_display()
+
+    def state_name(self):
+        return self.get_state_display()
