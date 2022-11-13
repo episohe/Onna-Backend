@@ -5,13 +5,13 @@ from django.db import models
 class Realty(models.Model):
     """매물장"""
 
-    TRANSACTION_CHOICES = (
+    TRANSACTION_CHOICES: tuple = (
         ('1', '매매'),
         ('2', '전세'),
         ('3', '월세'),
     )
 
-    PROPERTY_CHOICES = (
+    PROPERTY_CHOICES: tuple = (
         ('1', '아파트'),
         ('2', '빌라'),
         ('3', '상가'),
@@ -20,13 +20,19 @@ class Realty(models.Model):
         ('6', '원룸')
     )
 
-    PHONE_AGENCY_CHOICES = (
+    PHONE_AGENCY_CHOICES: tuple = (
         ('1', 'SKT'),
         ('2', 'KT'),
         ('3', 'LGU+'),
         ('4', 'SKT 알뜰폰'),
         ('5', 'KT 알뜰폰'),
         ('6', 'LGU+ 알뜰폰'),
+    )
+
+    STATE_CHOICES: tuple = (
+        ('1', '접수'),
+        ('2', '계약 중'),
+        ('3', '계약 완료'),
     )
 
     user = models.ForeignKey(
@@ -46,6 +52,7 @@ class Realty(models.Model):
     price = models.IntegerField(verbose_name="매매가", default=0)
     deposit = models.IntegerField(verbose_name="보증금", default=0)
     monthly_rent = models.IntegerField(verbose_name="월세", default=0)
+    state = models.IntegerField(choices=STATE_CHOICES, verbose_name="진행 단계", default=1)
     memo = models.TextField(verbose_name="비고", null=True, blank=True)
 
     class Meta:
