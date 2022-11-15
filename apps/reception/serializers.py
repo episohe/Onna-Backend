@@ -8,12 +8,15 @@ class ReceptionSerializer(serializers.ModelSerializer):
 
     transaction_type_name = serializers.CharField(read_only=True)
     property_type_name = serializers.CharField(read_only=True)
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
+    user_name = serializers.CharField(source="user.name", read_only=True)
 
     class Meta:
         model = Reception
         fields = [
             "id",
             "user",
+            "user_name",
             "client_name",
             "client_phone",
             "transaction_type",
@@ -34,7 +37,6 @@ class ReceptionSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """Create and return a reception."""
-
         reception = Reception.objects.create(**validated_data)
         return reception
 

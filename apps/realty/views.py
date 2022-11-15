@@ -13,10 +13,13 @@ class RealtyListCreateView(generics.ListCreateAPIView):
     queryset = Realty.objects.order_by('-id')
     serializer_class = RealtySerializer
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 
 @extend_schema_view(
     get=extend_schema(operation_id="매물장 상세 보기"),
-    put=extend_schema(operation_id="매물장 수정"),
+    put=extend_schema(operation_id="매물장 수정", deprecated=True),
     patch=extend_schema(operation_id="매물장 부분 수정"),
     delete=extend_schema(operation_id="매물장 삭제")
 )

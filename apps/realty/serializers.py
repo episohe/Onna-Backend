@@ -7,14 +7,16 @@ class RealtySerializer(serializers.ModelSerializer):
     """Serializer for the reception object."""
 
     transaction_type_name = serializers.CharField(read_only=True)
-    property_type_name = serializers.CharField(read_only=True)
-    phone_agency_name = serializers.CharField(read_only=True)
+    property_type_name: int = serializers.CharField(read_only=True)
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
+    user_name = serializers.CharField(source="user.name", read_only=True)
 
     class Meta:
         model = Realty
         fields = [
             "id",
             "user",
+            "user_name",
             "client_name",
             "client_phone",
             "phone_agency",
