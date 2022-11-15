@@ -10,11 +10,13 @@ class ReceptionSerializer(serializers.ModelSerializer):
     property_type_name = serializers.CharField(read_only=True)
     user = serializers.PrimaryKeyRelatedField(read_only=True)
     user_name = serializers.CharField(source="user.name", read_only=True)
+    created = serializers.DateTimeField(read_only=True, format='%Y-%m-%d')
 
     class Meta:
         model = Reception
         fields = [
             "id",
+            "created",
             "user",
             "user_name",
             "client_name",

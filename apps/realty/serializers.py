@@ -10,11 +10,13 @@ class RealtySerializer(serializers.ModelSerializer):
     property_type_name: int = serializers.CharField(read_only=True)
     user = serializers.PrimaryKeyRelatedField(read_only=True)
     user_name = serializers.CharField(source="user.name", read_only=True)
+    created = serializers.DateTimeField(read_only=True, format='%Y-%m-%d')
 
     class Meta:
         model = Realty
         fields = [
             "id",
+            "created",
             "user",
             "user_name",
             "client_name",

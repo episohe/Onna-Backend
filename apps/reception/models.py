@@ -1,8 +1,10 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from core.models import CoreModel
 
-class Reception(models.Model):
+
+class Reception(CoreModel):
     """매수장"""
 
     TRANSACTION_CHOICES: tuple = (
