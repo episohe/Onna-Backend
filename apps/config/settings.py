@@ -42,6 +42,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env.SECRET_KEY.get_secret_value()
 
+DEBUG = env.DEV_DEBUG
+
+ALLOWED_HOSTS = ['*']
+
 # Application definition
 DJANGO_APPS = [
     "django.contrib.admin",
@@ -64,6 +68,7 @@ THIRD_PARTY_APPS = [
     "rest_framework.authtoken",
     "drf_spectacular",
     "corsheaders",
+    "debug_toolbar"
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
@@ -192,3 +197,15 @@ SPECTACULAR_SETTINGS = {
 }
 
 AUTH_USER_MODEL = "user.User"
+
+WSGI_APPLICATION = 'config.wsgi.application'
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "HOST": env.DEV_DB_HOST,
+        "USER": env.DEV_DB_USERNAME,
+        "PASSWORD": env.DEV_DB_PASSWORD.get_secret_value(),
+        "NAME": env.DEV_DB_NAME,
+    }
+}
