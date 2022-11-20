@@ -11,6 +11,9 @@ class RealtySerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True)
     user_name = serializers.CharField(source="user.name", read_only=True)
     created = serializers.DateTimeField(read_only=True, format='%Y-%m-%d')
+    phone_agency = serializers.ChoiceField(choices=Realty.PHONE_AGENCY_CHOICES, read_only=True)
+    transaction_type = serializers.ChoiceField(choices=Realty.TRANSACTION_CHOICES, read_only=True)
+    property_type = serializers.ChoiceField(choices=Realty.PROPERTY_CHOICES, read_only=True)
 
     class Meta:
         model = Realty
