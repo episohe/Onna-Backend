@@ -9,32 +9,32 @@ class ReceptionSerializer(serializers.ModelSerializer):
     transaction_type_name = serializers.CharField(read_only=True)
     property_type_name = serializers.CharField(read_only=True)
     user = serializers.PrimaryKeyRelatedField(read_only=True)
-    user_name = serializers.CharField(source="user.name", read_only=True)
+    user_name = serializers.CharField(source='user.name', read_only=True)
     created = serializers.DateTimeField(read_only=True, format='%Y-%m-%d')
 
     class Meta:
         model = Reception
         fields = [
-            "id",
-            "created",
-            "user",
-            "user_name",
-            "client_name",
-            "client_phone",
-            "transaction_type",
-            "transaction_type_name",
-            "property_type",
-            "property_type_name",
-            "region",
-            "price",
-            "deposit",
-            "monthly_rent",
-            "memo",
+            'id',
+            'created',
+            'user',
+            'user_name',
+            'client_name',
+            'client_phone',
+            'transaction_type',
+            'transaction_type_name',
+            'property_type',
+            'property_type_name',
+            'region',
+            'price',
+            'deposit',
+            'monthly_rent',
+            'memo',
         ]
         extra_kwargs = {
-            "id": {"read_only": True},
-            "transaction_type": {"write_only": True},
-            "property_type": {"write_only": True},
+            'id': {'read_only': True},
+            'transaction_type': {'write_only': True},
+            'property_type': {'write_only': True},
         }
 
     def create(self, validated_data):

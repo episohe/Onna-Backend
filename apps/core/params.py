@@ -21,3 +21,10 @@ region_param = OpenApiParameter(
     type=OpenApiTypes.STR,
     location=OpenApiParameter.QUERY,
 )
+
+state_param = OpenApiParameter(
+    name='state',
+    description='거래 상태',
+    type=OpenApiTypes.INT,
+    location=OpenApiParameter.QUERY,
+)
