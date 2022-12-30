@@ -23,12 +23,12 @@ class Settings(BaseSettings):
     SECRET_KEY: SecretStr
 
     # DEV
-    DEV_DB_USERNAME: str
-    DEV_DB_PASSWORD: SecretStr
-    DEV_DB_HOST: str
-    DEV_DB_PORT: int
-    DEV_DB_NAME: str
-    DEV_DEBUG: bool
+    DB_USERNAME: str
+    DB_PASSWORD: SecretStr
+    DB_HOST: str
+    DB_PORT: int
+    DB_NAME: str
+    DEBUG: bool
 
     class Config:
         env_file = '.env'
@@ -42,7 +42,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env.SECRET_KEY.get_secret_value()
 
-DEBUG = env.DEV_DEBUG
+DEBUG = env.DEBUG
 
 ALLOWED_HOSTS = ['*']
 
@@ -200,19 +200,19 @@ AUTH_USER_MODEL = 'user.User'
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'HOST': env.DEV_DB_HOST,
-#         'USER': env.DEV_DB_USERNAME,
-#         'PASSWORD': env.DEV_DB_PASSWORD.get_secret_value(),
-#         'NAME': env.DEV_DB_NAME,
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': env.DB_HOST,
+        'USER': env.DB_USERNAME,
+        'PASSWORD': env.DB_PASSWORD.get_secret_value(),
+        'NAME': env.DB_NAME,
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
