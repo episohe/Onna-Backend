@@ -56,6 +56,7 @@ class Realty(CoreModel):
     monthly_rent = models.IntegerField(verbose_name="월세", default=0)
     state = models.IntegerField(choices=STATE_CHOICES, verbose_name="진행 단계", default=1)
     memo = models.TextField(verbose_name="비고", null=True, blank=True)
+    is_private = models.BooleanField(verbose_name="비공개 여부", default=False)
 
     class Meta:
         db_table = "realty"
