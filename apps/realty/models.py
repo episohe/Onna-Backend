@@ -46,7 +46,7 @@ class Realty(CoreModel):
 
     client_name = models.CharField(verbose_name="소유자 성함", max_length=10)
     client_phone = models.CharField(verbose_name="소유자 연락처", max_length=20)
-    phone_agency = models.IntegerField(verbose_name="통신사", choices=PHONE_AGENCY_CHOICES)
+    phone_agency = models.IntegerField(verbose_name="통신사", choices=PHONE_AGENCY_CHOICES, null=True)
     lessee_phone = models.CharField(verbose_name="임차인 연락처", max_length=20)
     transaction_type = models.IntegerField(verbose_name="거래 종류", choices=TRANSACTION_CHOICES)
     property_type = models.IntegerField(verbose_name="부동산 종류", choices=PROPERTY_CHOICES)
