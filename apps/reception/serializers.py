@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from realty.models import Realty
 from reception.models import Reception
 
 
@@ -11,6 +12,8 @@ class ReceptionSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True)
     user_name = serializers.CharField(source='user.name', read_only=True)
     created = serializers.DateTimeField(read_only=True, format='%Y-%m-%d')
+    state = serializers.ChoiceField(choices=Realty.STATE_CHOICES)
+    state_name = serializers.CharField(read_only=True)
 
     class Meta:
         model = Reception
@@ -30,6 +33,8 @@ class ReceptionSerializer(serializers.ModelSerializer):
             'deposit',
             'monthly_rent',
             'memo',
+            'state',
+            'state_name'
         ]
         extra_kwargs = {
             'id': {'read_only': True},

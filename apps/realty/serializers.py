@@ -15,6 +15,8 @@ class RealtySerializer(serializers.ModelSerializer):
     phone_agency_name: str = serializers.CharField(read_only=True)
     transaction_type = serializers.ChoiceField(choices=Realty.TRANSACTION_CHOICES, read_only=True)
     property_type = serializers.ChoiceField(choices=Realty.PROPERTY_CHOICES, read_only=True)
+    state = serializers.ChoiceField(choices=Realty.STATE_CHOICES)
+    state_name = serializers.CharField(read_only=True)
 
     class Meta:
         model = Realty
@@ -37,6 +39,8 @@ class RealtySerializer(serializers.ModelSerializer):
             'deposit',
             'monthly_rent',
             'memo',
+            'state',
+            'state_name',
             'is_private'
         ]
         extra_kwargs = {
