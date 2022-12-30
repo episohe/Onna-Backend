@@ -5,15 +5,16 @@ from rest_framework import generics, authentication, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from core.params import transaction_type_param, property_type_param, region_param
+from core.params import transaction_type_param, property_type_param, region_param, state_param
 from reception.models import Reception
 from reception.serializers import ReceptionSerializer
 
 
 @extend_schema_view(
     post=extend_schema(operation_id='매수장 생성'),
+    get=extend_schema(operation_id='매수장 목록'),
 )
-class ReceptionCreateView(generics.CreateAPIView):
+class ReceptionCreateView(generics.ListCreateAPIView):
     queryset = Reception.objects.order_by('-id')
     serializer_class = ReceptionSerializer
 
@@ -28,19 +29,21 @@ class ReceptionListView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     @extend_schema(
-        operation_id="매수장 조회",
+        operation_id='매수장 조회',
         responses=ReceptionSerializer,
-        parameters=[transaction_type_param, property_type_param, region_param]
+        parameters=[transaction_type_param, property_type_param, region_param, state_param]
     )
     def get(self, request):
 
         q = Q()
-        if transaction_type := request.GET.get("transaction_type"):
+        if transaction_type := request.GET.get('transaction_type'):
             q &= (Q(transaction_type=transaction_type))
         if property_type := request.GET.get('property_type', None):
             q &= (Q(property_type=property_type))
         if region := request.GET.get('region', None):
             q &= (Q(region__contains=region))
+        if state := request.GET.get('state', None):
+            q &= (Q(state=state))
 
         try:
             reception = Reception.objects.filter(q).select_related('user').order_by('-created')
@@ -53,12 +56,12 @@ class ReceptionListView(APIView):
 
 
 @extend_schema_view(
-    get=extend_schema(operation_id="매수장 상세 보기"),
-    put=extend_schema(operation_id="매수장 수정", deprecated=True),
-    patch=extend_schema(operation_id="매수장 부분 수정"),
-    delete=extend_schema(operation_id="매수장 삭제")
+    get=extend_schema(operation_id='매수장 상세 보기'),
+    put=extend_schema(operation_id='매수장 수정', deprecated=True),
+    patch=extend_schema(operation_id='매수장 부분 수정'),
+    delete=extend_schema(operation_id='매수장 삭제')
 )
 class ReceptionManageView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Reception.objects.order_by('-id')
     serializer_class = ReceptionSerializer
-    lookup_url_kwarg = "pk"
+    lookup_url_kwarg = 'pk'

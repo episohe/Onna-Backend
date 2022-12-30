@@ -24,10 +24,10 @@ class CreateTokenView(ObtainAuthToken):
 
 
 @extend_schema_view(
-    get=extend_schema(operation_id="내 계정 정보"),
-    put=extend_schema(operation_id="내 계정 정보 수정"),
-    patch=extend_schema(operation_id="내 계정 정보 부분 수정"),
-    delete=extend_schema(operation_id="내 계정 삭제")
+    get=extend_schema(operation_id='내 계정 정보'),
+    put=extend_schema(operation_id='내 계정 정보 수정'),
+    patch=extend_schema(operation_id='내 계정 정보 부분 수정'),
+    delete=extend_schema(operation_id='내 계정 삭제')
 )
 class ManageSelfView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
