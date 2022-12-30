@@ -28,7 +28,6 @@ class Settings(BaseSettings):
     DB_HOST: str
     DB_PORT: int
     DB_NAME: str
-    DEBUG: bool
 
     class Config:
         env_file = '.env'
@@ -42,7 +41,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env.SECRET_KEY.get_secret_value()
 
-DEBUG = env.DEBUG
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -209,10 +208,3 @@ DATABASES = {
         'NAME': env.DB_NAME,
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
