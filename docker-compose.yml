@@ -15,7 +15,7 @@ services:
     command: >
       sh -c "python manage.py wait_for_db &&
              python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:8000"
+             gunicorn --bind 0.0.0.0:8000 config.wsgi:application"
     environment:
       - DB_HOST=${DB_HOST}
       - DB_NAME=${DB_NAME}
@@ -37,11 +37,10 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
 
   nginx:
-    restart: unless-stopped
+    restart: always
     image: nginx
     ports:
       - "80:80"
-      - "443:443"
 
     volumes:
       - ./nginx/user:/etc/nginx/user.conf.d:ro

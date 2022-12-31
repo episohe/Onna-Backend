@@ -8,3 +8,5 @@ PyJWT~=2.4.0
 python-dotenv~=0.20.0
 pydantic~=1.9.1
 pillow==9.2.0
+uwsgi
+gunicorn==20.0.4
