@@ -40,7 +40,7 @@ services:
     restart: always
     build:
       context: ./nginx
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     ports:
       - "80:80"
     volumes:
