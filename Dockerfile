@@ -2,11 +2,9 @@ FROM python:3.10.5-alpine3.16
 
 ENV PYTHONUNBUFFERED 1
 
-COPY ./requirements.txt /tmp/requirements.txt
-COPY ./requirements.dev.txt /tmp/requirements.dev.txt
-COPY apps /apps
+COPY . .
 
-WORKDIR /apps
+WORKDIR .
 EXPOSE 8000
 
 ARG DEV=true
