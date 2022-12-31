@@ -199,12 +199,19 @@ AUTH_USER_MODEL = 'user.User'
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'HOST': env.DB_HOST,
+#         'USER': env.DB_USERNAME,
+#         'PASSWORD': env.DB_PASSWORD.get_secret_value(),
+#         'NAME': env.DB_NAME,
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'HOST': env.DB_HOST,
-        'USER': env.DB_USERNAME,
-        'PASSWORD': env.DB_PASSWORD.get_secret_value(),
-        'NAME': env.DB_NAME,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
