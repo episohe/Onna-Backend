@@ -38,8 +38,7 @@ services:
 
   nginx:
     restart: always
-    build:
-      context: ./nginx
+    image: nginx
     ports:
       - "80:80"
     volumes:
