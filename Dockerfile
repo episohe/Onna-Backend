@@ -2,9 +2,6 @@ FROM python:3.10.5-alpine3.16
 
 ENV PYTHONUNBUFFERED 1
 
-RUN apt-get -y update
-RUN apt-get -y install vim
-
 COPY ./requirements.txt /tmp/requirements.txt
 COPY ./requirements.dev.txt /tmp/requirements.dev.txt
 COPY apps /apps
